@@ -2,7 +2,15 @@ package epl.hmrc.tillroll
 
 import epl.hmrc.tillroll.TillRoll._
 
-object de_20180502_hmrc {
+
+// Notes asked to used Doubles for values.
+
+object TillRollMain {
+
+  val costMap = Map[String, Double](("Apple", 60.0),
+    ("Orange", 25.0))
+
+
 
   def main(args:Array[String]): Unit = {
 
@@ -18,7 +26,7 @@ object de_20180502_hmrc {
 
     println("tillItems " + tillItems.mkString(" ") )
 
-    println("cost " + TillRoll(tillItems).totalCostPence() )
+    println("cost " + TillRoll.totalCostPence( TillRoll(tillItems, costMap)) )
   }
 
 }
