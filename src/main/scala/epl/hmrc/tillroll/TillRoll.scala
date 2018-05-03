@@ -42,7 +42,7 @@ object TillRoll {
   {
     // Add in special offers here.
     val (cost, tillRollAfterOffers, itemsSoFar) = _totalCostPence(
-      BuyOneAppleGetOneFree( costTillRoll ) )
+      GetThreeOrangesForPriceTwo(BuyOneAppleGetOneFree( costTillRoll ) ))
     (cost, tillRollAfterOffers, itemsSoFar)
   }
 
@@ -61,6 +61,18 @@ object TillRoll {
     val itemsOutAfter = itemsOutSoFar ++ List.fill(count)(TillRoll.APPLE)
       // This irrelevent if the basket canot be changed, but could be that we add 2 apples for each 1 then we would add them in here?.
     ( costSoFar + costApples, tillRollLeft, itemsOutAfter )
+  }
+
+  def GetThreeOrangesForPriceTwo( costTillRoll:( Double, TillRoll, List[String]) ) : ( Double, TillRoll, List[String]  ) =
+  {
+    val ( costSoFar, tillRoll, itemsOutSoFar ) = costTillRoll
+    val count = tillRoll.tillItems.count( _ == TillRoll.ORANGE )
+    val numOrangesToPayFor = (count/3)*2 + count%3
+    val costOranges = tillRoll.costMap(TillRoll.ORANGE) * numOrangesToPayFor
+    val tillRollLeft = TillRoll( tillRoll.tillItems.filter( _ != TillRoll.ORANGE ), tillRoll.costMap )
+    val itemsOutAfter = itemsOutSoFar ++ List.fill(count)(TillRoll.ORANGE)
+    // This irrelevent if the basket canot be changed, but could be that we add 2 apples for each 1 then we would add them in here?.
+    ( costSoFar + costOranges, tillRollLeft, itemsOutAfter )
   }
 
 }
