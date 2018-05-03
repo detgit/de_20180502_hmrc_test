@@ -1,16 +1,18 @@
 package epl.hmrc.tillroll
 
 
-case class TillRoll(tillItems:List[String] ) {
+case class TillRoll( tillItems:List[String], costMap:Map[String, Double] )
 
-  def totalCostPence(  ) : Double =
+object TillRoll {
+
+  def totalCostPence( tillRoll:TillRoll  ) : Double =
   {
-    return 0.0
+    tillRoll.tillItems.foldLeft(0.0d)( (cost, tillItem) => cost + tillRoll.costMap(tillItem)  )
   }
 
-  def totalCostPound(  ) : Double =
+  def totalCostPound( tillRoll:TillRoll  ) : Double =
   {
-    return totalCostPence()
+    return totalCostPence( tillRoll)/100.0
   }
 
 
