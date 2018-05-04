@@ -21,12 +21,14 @@ object TillRollMain {
     // 4) "Orange"                    0.25
     // 5) "Orange Orange"             0.50
     // 6) "Orange Apple Orange Apple" 1.90
+    // for testing totalCostPence
 
     val tillItems = args.toList
 
     println("tillItems " + tillItems.mkString(" ") )
 
-    println("cost " + TillRoll.totalCostPence( TillRoll(tillItems, costMap)) )
+//    println("cost " + TillRoll.totalCostPence( TillRoll(tillItems, costMap)) )
+    println("cost " + TillRoll.totalCostWithSpecialOffersPence( TillRoll(tillItems, costMap)) )
   }
 
 }
